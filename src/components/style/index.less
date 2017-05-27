@@ -1,0 +1,38 @@
+@import "./variable/index";
+@import "./mixins/index";
+@import "./amimate/index";
+@import "./transition";
+@import "./utils";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    .setTapColor();
+}
+
+body {
+    margin-right: auto;
+    margin-left: auto;
+    font-family: @font-family;
+    line-height: @line-height;
+    color: @color-text;
+    background: @color-bg;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    .setTapColor();
+
+    img {
+        border: 0;
+    }
+}

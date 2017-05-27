@@ -1,0 +1,24 @@
+@import '../../style/variable/index';
+@import '../../style/mixins/index';
+
+@prefix: ~"@{ui-prefix}-textarea";
+
+.@{prefix} {
+    display: block;
+    border: 0;
+    resize: none;
+    width: 100%;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    outline: 0;
+    background: transparent;
+
+    &::placeholder {
+        color: @color-text-tips;
+    }
+
+    &[disabled] {
+        color: @color-text-tips;
+    }
+}

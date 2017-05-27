@@ -1,0 +1,41 @@
+@import "../style/mixins/index";
+@import "../style/variable/index";
+
+@size: 88;
+@prefix: ~"@{ui-prefix}-header";
+
+.@{prefix} {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .px2rem(height, @size);
+    .px2rem(padding-left, @layout-padding);
+    .px2rem(padding-right, @layout-padding);
+    background-color: white;
+    border-bottom: 1px solid #d6d6d6;
+    .px2rem(font-size, @font-size-title);
+
+    &__title {
+        .px2rem(line-height, @size);
+        .ellipsis();
+        text-align: center;
+        color: @color-text-title;
+    }
+
+    &__left,
+    &__right {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 4em;
+    }
+
+    &__left {
+        justify-content: flex-start;
+    }
+
+    &__right {
+        justify-content: flex-end;
+        text-align: right;
+    }
+}

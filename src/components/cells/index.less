@@ -1,0 +1,21 @@
+@import "../style/mixins/index";
+@import "../style/variable/index";
+
+@prefix: ~"@{ui-prefix}-cells";
+
+.@{prefix} {
+    &__hd,
+    &__ft {
+        .px2rem(font-size, @font-size);
+        color: @color-text-tips;
+    }
+    &__hd {
+        .px2rem(padding, @layout-padding/2, @layout-padding, @layout-padding/4);
+    }
+    &__ft {
+        .px2rem(padding, @layout-padding/4, @layout-padding, @layout-padding/2);
+    }
+    &__bd {
+        background-color: #fff;
+    }
+}

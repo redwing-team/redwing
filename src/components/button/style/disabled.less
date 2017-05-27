@@ -1,0 +1,11 @@
+@import "../../style/mixins/index";
+@import "./variable";
+@import "./mixins";
+
+.@{btn-prefix} {
+    &[disabled] {
+        color: ~`colorPalette("@{color-text}", 3)`;
+        background-color: ~`colorPalette("@{color-text}", 2)`;
+        border-color: ~`colorPalette("@{color-text}", 2)`;
+    }
+}

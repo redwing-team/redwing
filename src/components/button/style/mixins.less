@@ -1,0 +1,31 @@
+@import "./variable";
+@import "../../style/mixins/index";
+
+.btn-theme-color(@color) {
+    color: white;
+    background-color: @color;
+    border-color: @color;
+
+    &.@{btn-prefix}--loading,
+    &:active {
+        color: rgba(255, 255, 255, 0.6);
+        background-color: ~`colorPalette("@{color}", 7)`;
+    }
+}
+
+.btn-theme-ghost(@color) {
+    color: @color;
+    border-color: @color;
+    background-color: transparent;
+
+    &:active {
+        color: rgba(255, 255, 255, 0.6);
+        background-color: ~`colorPalette("@{color}", 7)`;
+    }
+
+    &.@{btn-prefix}--loading {
+        color: ~`colorPalette("@{color}", 8)`;
+        border-color: ~`colorPalette("@{color}", 8)`;
+        background-color: transparent;
+    }
+}

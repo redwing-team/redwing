@@ -1,0 +1,27 @@
+@import "../style/mixins/index";
+@import "../style/variable/index";
+
+@prefix: ~"@{ui-prefix}-toast";
+
+.@{prefix} {
+    z-index: 1000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 70%;
+    .px2rem(padding, 30);
+    .px2rem(border-radius, 10);
+    background: rgba(40, 40, 40, .75);
+    text-align: center;
+    color: white;
+
+    &__icon {
+        .px2rem(font-size, 80);
+        .px2rem(margin-bottom, 10);
+        .px2rem(margin-top, 10);
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}

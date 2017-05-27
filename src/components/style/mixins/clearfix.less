@@ -1,0 +1,14 @@
+.clearfix() {
+    &:before,
+    &:after {
+        display: table;
+        content: ' ';
+    }
+
+    &:after {
+        font-size: 0;
+        visibility: hidden;
+        clear: both;
+        height: 0;
+    }
+}

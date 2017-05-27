@@ -1,0 +1,25 @@
+@import '../../style/variable/index';
+@import '../../style/mixins/index';
+
+.@{ui-prefix}-select {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-size: inherit;
+    color: inherit;
+    height: 1.5em;
+    line-height: 1.5;
+
+    &--placeholder {
+        color: @color-text-tips;
+        option {
+            color: @color-text-title;
+        }
+    }
+
+    &[disabled] {
+        color: @color-text-tips;
+    }
+}

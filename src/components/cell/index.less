@@ -1,0 +1,56 @@
+@import '../style/variable/index';
+@import '../style/mixins/index';
+
+@prefix: ~"@{ui-prefix}-cell";
+
+.@{prefix} {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .px2rem(padding, @layout-padding/2, @layout-padding);
+    .px2rem(font-size, @font-size-sub-title);
+    color: @color-text-title;
+
+    &--top {
+        align-items: flex-start;
+    }
+    &--bottom {
+        align-items: flex-end;
+    }
+    &--access {
+        &:active {
+            background: #f1f1f1;
+        }
+    }
+
+    &__hd {
+        .px2rem(margin-right, @layout-padding/2);
+    }
+
+    &__bd {
+        flex: 1;
+    }
+
+    &__ft,
+    &__icon {
+        color: @color-text-tips;
+    }
+
+    & + & {
+        &:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 1px;
+            border-top: 1px solid #e5e5e5;
+            color: #e5e5e5;
+            transform-origin: 0 0;
+            transform: scaleY(0.5);
+            .px2rem(left, @layout-padding);
+        }
+    }
+}

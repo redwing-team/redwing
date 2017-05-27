@@ -1,0 +1,25 @@
+@import '../../style/variable/index';
+@import '../../style/mixins/index';
+
+@prefix: ~"@{ui-prefix}-checkbox";
+
+.@{prefix} {
+    display: inline-block;
+    color: inherit;
+    transition: color 0.3s;
+    input {
+        visibility: hidden;
+        position: absolute;
+    }
+    &--checked {
+        color: @color-primary;
+    }
+    &--disabled {
+        opacity: 0.6;
+    }
+
+    &__icon {
+        font-size: 1.4em;
+        vertical-align: middle;
+    }
+}

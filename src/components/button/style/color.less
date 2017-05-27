@@ -1,0 +1,30 @@
+@import "../../style/mixins/index";
+@import "./variable";
+@import "./mixins";
+
+.@{btn-prefix} {
+    color: @color-text;
+    background-color: white;
+    border-color: ~`colorPalette("@{color-text}", 2)`;
+
+    &:active {
+        background-color: ~`colorPalette("@{color-text}", 2)`;
+    }
+
+    &--loading {
+        &,
+        &:active {
+            background-color: white;
+        }
+    }
+
+    &--primary {
+        .btn-theme-color(@btn-primary);
+    }
+    &--ghost {
+        .btn-theme-ghost(@btn-primary);
+    }
+    &--danger {
+        .btn-theme-color(@btn-danger);
+    }
+}

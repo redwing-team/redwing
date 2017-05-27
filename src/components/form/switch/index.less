@@ -1,0 +1,55 @@
+@import '../../style/variable/index';
+@import '../../style/mixins/index';
+
+@width: 80;
+@height: @width * 0.6;
+
+.@{ui-prefix}-switch {
+    box-sizing: content-box;
+    position: relative;
+    .px2rem(width, @width);
+    .px2rem(height, @height);
+    .px2rem(border-radius, @height/2);
+    border: 1px solid #dfdfdf;
+    background-color: #dfdfdf;
+    transition: background-color 0.1s, border 0.1s;
+    appearance: none;
+    outline: 0;
+
+    &:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        .px2rem(width, @width);
+        .px2rem(height, @height);
+        .px2rem(border-radius, @height/2);
+        background-color: #fdfdfd;
+        transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+    }
+    &:after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        .px2rem(width, @height);
+        .px2rem(height, @height);
+        .px2rem(border-radius, @height/2);
+        background-color: #fff;
+        box-shadow: 0.04rem 0.04rem 0.08rem rgba(0, 0, 0, .21);
+        transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+    }
+    &:checked {
+        border-color: @color-primary;
+        background-color: @color-primary;
+    }
+    &:checked:before {
+        transform: scale(0);
+    }
+    &:checked:after {
+        transform: translateX(@width*0.4 / @font-size-root * 1rem);
+    }
+    &[disabled] {
+        opacity: 0.6;
+    }
+}
