@@ -18,8 +18,8 @@ export default {
         }
     },
     watch: {
-        value(val) {
-            this.currentValue = val
+        value(value) {
+            this.currentValue = value
         },
         currentValue(v) {
             this.$emit('input', v)
@@ -32,6 +32,12 @@ export default {
         },
         blur() {
             this.$emit('blur', this.currentValue)
+        }
+    },
+    created() {
+        const value = this.value
+        if (value !== undefined) {
+            this.currentValue = value
         }
     }
 }

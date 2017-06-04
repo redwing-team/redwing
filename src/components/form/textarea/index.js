@@ -13,10 +13,7 @@ export default {
     },
     watch: {
         value(value) {
-            const type = typeof value
-            this.currentValue = type !== 'undefined' && type !== null
-                ? value
-                : ''
+            this.currentValue = value
         },
         currentValue(v) {
             this.$emit('input', v)
@@ -24,7 +21,7 @@ export default {
     },
     created() {
         const value = this.value
-        if (value) {
+        if (value !== undefined) {
             this.currentValue = value
         }
     }
