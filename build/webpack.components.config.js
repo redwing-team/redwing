@@ -14,7 +14,7 @@ module.exports = {
     },
     output: {
         library: 'redwing',
-        libraryTarget: 'umd2',
+        libraryTarget: 'commonjs2',
         filename: '[name].js',
         path: path.resolve(__dirname, '../dist')
     },
