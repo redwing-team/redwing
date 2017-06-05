@@ -1,6 +1,24 @@
 @import '../components/style/variable/index';
 @import '../components/style/mixins/index';
 
+html, body {
+    height: 100%;
+    .setTapColor();
+}
+
+body {
+    margin-right: auto;
+    margin-left: auto;
+    font-family: @font-family;
+    line-height: @line-height;
+    color: @color-text;
+    background: @color-bg;
+}
+
+ul, ol {
+    list-style: none;
+}
+
 #app {
     height: 100%;
     overflow: auto;
