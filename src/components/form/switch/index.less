@@ -1,15 +1,15 @@
 @import '../../style/variable/index';
 @import '../../style/mixins/index';
 
-@width: 80;
+@width: 80px;
 @height: @width * 0.6;
 
 .@{ui-prefix}-switch {
     box-sizing: content-box;
     position: relative;
-    .px2rem(width, @width);
-    .px2rem(height, @height);
-    .px2rem(border-radius, @height/2);
+    width: @width;
+    height: @height;
+    border-radius: @height/2;
     border: 1px solid #dfdfdf;
     background-color: #dfdfdf;
     transition: background-color 0.1s, border 0.1s;
@@ -21,9 +21,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        .px2rem(width, @width);
-        .px2rem(height, @height);
-        .px2rem(border-radius, @height/2);
+        width: @width;
+        height: @height;
+        border-radius: @height/2;
         background-color: #fdfdfd;
         transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
     }
@@ -32,9 +32,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        .px2rem(width, @height);
-        .px2rem(height, @height);
-        .px2rem(border-radius, @height/2);
+        width: @height;
+        height: @height;
+        border-radius: @height/2;
         background-color: #fff;
         box-shadow: 0.04rem 0.04rem 0.08rem rgba(0, 0, 0, .21);
         transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);

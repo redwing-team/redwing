@@ -9,8 +9,8 @@
     align-items: center;
     flex-wrap: nowrap;
     justify-content: space-between;
-    .px2rem(padding, @layout-padding/2, @layout-padding);
-    .px2rem(font-size, @font-size-sub-title);
+    padding: @layout-padding/2 @layout-padding;
+    font-size: @font-size-sub-title;
     color: @color-text-title;
 
     &--top {
@@ -26,7 +26,7 @@
     }
 
     &__hd {
-        .px2rem(margin-right, @layout-padding/2);
+        margin-right: @layout-padding/2;
     }
 
     &__bd {
@@ -42,15 +42,14 @@
         &:before {
             content: " ";
             position: absolute;
-            left: 0;
             top: 0;
             right: 0;
+            left: @layout-padding;
             height: 1px;
             border-top: 1px solid #e5e5e5;
             color: #e5e5e5;
             transform-origin: 0 0;
             transform: scaleY(0.5);
-            .px2rem(left, @layout-padding);
         }
     }
 }

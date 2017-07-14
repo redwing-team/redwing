@@ -1,7 +1,8 @@
 @import '../components/style/variable/index';
 @import '../components/style/mixins/index';
 
-html, body {
+html,
+body {
     height: 100%;
     .setTapColor();
 }
@@ -15,7 +16,8 @@ body {
     background: @color-bg;
 }
 
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -25,13 +27,11 @@ ul, ol {
 }
 
 h1 {
-    .px2rem(font-size, @font-size-title);
-    .px2rem(font-size, @font-size-title);
+    font-size: @font-size-title;
     margin: 1.5em 0;
 }
 
 h2 {
-    .px2rem(font-size, @font-size-sub-title);
-    .px2rem(font-size, @font-size-title);
+    font-size: @font-size-sub-title;
     margin: 1.2em 0;
 }
