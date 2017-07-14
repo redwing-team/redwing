@@ -2,12 +2,8 @@
     "env": {
         "browser": true
     },
-    "extends": [
-        "airbnb-base"
-    ],
-    "plugins": [
-        "html"
-    ],
+    "extends": ["airbnb-base"],
+    "plugins": ["html"],
     "rules": {
         "indent": [
             2,
