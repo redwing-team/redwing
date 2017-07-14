@@ -1,7 +1,6 @@
 @import "../style/mixins/index";
 
 @url: 'https://at.alicdn.com/t/font_smk8xgfen9xxn7b9';
-@prefix: ~"@{ui-prefix}-icon";
 @font-family: 'run';
 
 @font-face {
@@ -9,7 +8,7 @@
     src: url('@{url}.woff') format('woff'), url('@{url}.ttf') format('truetype'); /* iOS 4.1- */
 }
 
-.@{prefix} {
+.@{ui-prefix}-icon {
     display: inline-block;
     vertical-align: baseline;
     font-style: normal;
