@@ -1,11 +1,11 @@
 .clearfix() {
-    &:before,
-    &:after {
+    &::before,
+    &::after {
         display: table;
         content: ' ';
     }
 
-    &:after {
+    &::after {
         font-size: 0;
         visibility: hidden;
         clear: both;

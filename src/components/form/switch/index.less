@@ -16,7 +16,7 @@
     appearance: none;
     outline: 0;
 
-    &:before {
+    &::before {
         content: " ";
         position: absolute;
         top: 0;
@@ -27,7 +27,7 @@
         background-color: #fdfdfd;
         transition: transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
     }
-    &:after {
+    &::after {
         content: " ";
         position: absolute;
         top: 0;
@@ -36,17 +36,17 @@
         height: @height;
         border-radius: @height/2;
         background-color: #fff;
-        box-shadow: 0.04rem 0.04rem 0.08rem rgba(0, 0, 0, .21);
+        box-shadow: 0.04rem 0.04rem 0.08rem rgba(0, 0, 0, 0.21);
         transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
     }
     &:checked {
         border-color: @color-primary;
         background-color: @color-primary;
     }
-    &:checked:before {
+    &:checked::before {
         transform: scale(0);
     }
-    &:checked:after {
+    &:checked::after {
         transform: translateX(@width*0.4 / @font-size-root * 1rem);
     }
     &[disabled] {
