@@ -6,6 +6,7 @@ export default {
     },
     data() {
         return {
+            parents: null,
             items: [
                 'http://images.cnitblog.com/blog2015/678562/201504/262132219001037.jpg',
                 'https://omjivlrit.qnssl.com/1_f72a7bd.png',
@@ -14,5 +15,8 @@ export default {
                 'https://omjivlrit.qnssl.com/case_dcb230d.png'
             ]
         }
+    },
+    mounted() {
+        this.parents = [this.$el.parentNode]
     }
 }

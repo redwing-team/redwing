@@ -1,5 +1,8 @@
 export default {
     props: {
+        parents: {
+            type: Array
+        },
         src: {
             type: String,
             require: true
@@ -23,9 +26,9 @@ export default {
                 return v > 0
             }
         },
-        offset: {
+        preLoad: {
             type: Number,
-            default: 30,
+            default: 1,
             validator(v) {
                 return v > 0
             }
@@ -46,11 +49,12 @@ export default {
     methods: {
         show() {
             const el = this.$el
-            const coords = el.getBoundingClientRect()
+            const rect = el.getBoundingClientRect()
+            const preLoad = this.preLoad
             return (
-                (coords.top >= 0 && coords.left >= 0 && coords.top) <=
-                (window.innerHeight || document.documentElement.clientHeight) +
-                    this.offset
+                rect.top < window.innerHeight * preLoad &&
+                rect.bottom > 0 &&
+                (rect.left < window.innerWidth * preLoad && rect.right > 0)
             )
         },
         scroll() {
@@ -65,10 +69,29 @@ export default {
         },
         bindScroll() {
             window.addEventListener('scroll', this.scroll, false)
+            const parent = this.$el.parentNode
+            if (parent) {
+                parent.addEventListener('scroll', this.scroll, false)
+            }
+            let parents = this.parents
+            if (parents && parents.length) {
+                parents = [...parents]
+                parents.forEach(item => {
+                    item.addEventListener('scroll', this.scroll, false)
+                })
+            }
         },
         unbindScroll() {
-            window.removeEventListener('scroll', this.scroll)
             clearTimeout(this.timer)
+            window.removeEventListener('scroll', this.scroll)
+            const parent = this.$el.parentNode
+            if (parent) {
+                parent.removeEventListener('scroll', this.scroll)
+            }
+            const parent2 = this.parent
+            if (parent2) {
+                parent2.removeEventListener('scroll', this.scroll)
+            }
         },
         error(e) {
             this.$emit('error', e)
