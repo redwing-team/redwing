@@ -24,6 +24,7 @@ export default {
         value(v) {
             if (v !== this.html) {
                 this.$el.innerHTML = v
+                this.html = v
             }
         }
     },
