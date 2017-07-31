@@ -23,7 +23,7 @@ exports.cssLoaders = (options = {}, addPostcss) => {
             loaders.push({
                 loader: 'postcss-loader',
                 options: {
-                    sourceMap
+                    sourceMap: false // 为了兼容 px2rem 插件
                 }
             })
         }
