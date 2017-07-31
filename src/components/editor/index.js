@@ -11,11 +11,7 @@ export default {
         paste(e) {
             e.preventDefault()
             const html = e.clipboardData.getData('text/html')
-            document.execCommand(
-                'insertHTML',
-                false,
-                html.replace(/>\s+</g, '><')
-            )
+            document.execCommand('insertHTML', false, html)
             this.input()
         },
         input() {
