@@ -1,6 +1,6 @@
 {
     "name": "redwing",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "基于 Vue 2.0 实现的 Web 移动端 UI 基础组件库",
     "author": {
         "name": "redwing-team",
@@ -12,7 +12,10 @@
         "start": "webpack-dev-server --config build/webpack.site.config.js --hot --host 0.0.0.0",
         "release": "bash build/release.sh"
     },
-    "files": ["src", "dist"],
+    "files": [
+        "src",
+        "dist"
+    ],
     "engines": {
         "npm": ">= 3.0.0",
         "node": ">= 6.0.0"
