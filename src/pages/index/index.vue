@@ -4,8 +4,8 @@
         <xPageContent>
             <uCells>
                 <uCellsBody>
-                    <uCell v-for="item in items"
-                           :key="item"
+                    <uCell v-for="(item, index) in items"
+                           :key="index"
                            @click.native="to(item)"
                            access>
                         <uCellBody>{{item.name}}</uCellBody>

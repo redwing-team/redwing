@@ -7,16 +7,19 @@ const { cssLoaders, styleLoaders, assetsPath } = require('./utils')
 const env = process.env.NODE_ENV || 'development'
 const outputPath = path.join(__dirname, '../dist')
 
+const plugins = []
 let devtool
 let filename
 let htmlMinify
-const plugins = []
+let minimize
 
 if (env === 'development') {
     filename = '[name].js'
     devtool = '#source-map'
     htmlMinify = false
+    minimize = false
 } else {
+    minimize = true
     filename = assetsPath('js/[name].[chunkhash].js')
     devtool = '#eval-source-map'
     htmlMinify = {
@@ -36,6 +39,7 @@ if (env === 'development') {
 }
 
 const cssOptions = {
+    minimize,
     sourceMap: true,
     extract: true
 }
@@ -115,6 +119,8 @@ module.exports = {
     devServer: {
         disableHostCheck: true,
         contentBase: outputPath,
-        stats: 'normal' // errors-only, minimal, none, normal, verbose
+        stats: {
+            colors: true
+        }
     }
 }

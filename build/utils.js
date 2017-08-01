@@ -18,12 +18,12 @@ exports.cssLoaders = (options = {}, addPostcss) => {
 
     function generateLoaders(loader, loaderOptions) {
         const loaders = [cssLoader]
-
-        if (addPostcss) {
+        // 兼容 postcss-px2rem
+        if (addPostcss && loader && loader !== 'css') {
             loaders.push({
                 loader: 'postcss-loader',
                 options: {
-                    sourceMap: false // 为了兼容 px2rem 插件
+                    sourceMap
                 }
             })
         }

@@ -5,6 +5,7 @@ const { cssLoaders, styleLoaders, assetsPath } = require('./utils')
 
 const cssOptions = {
     minimize: true,
+    sourceMap: true,
     extract: true
 }
 
@@ -71,6 +72,8 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: true
+        })
     ]
 }
