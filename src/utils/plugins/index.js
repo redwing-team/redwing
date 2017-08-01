@@ -1,7 +1,7 @@
-import uiComponents from '../../dist/redwing'
-import '../../dist/redwing.css'
-import pageComponents from '../pages/components'
-import Toast from './plugins/toast'
+import uiComponents from '../../../dist/redwing'
+import '../../../dist/redwing.css'
+import pageComponents from '../../pages/components'
+import Toast from '../plugins/toast'
 
 console.log(uiComponents)
 export default {
