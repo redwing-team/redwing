@@ -3,151 +3,121 @@
 <head>
     <title>redwing</title>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge,chrome=1">
     <meta name="renderer"
           content="webkit">
     <script>
         /* eslint-disable */
-        ; (function (win, lib) {
-            var doc = win.document
-            var docEl = doc.documentElement
-            var metaEl = doc.querySelector('meta[name="viewport"]')
-            var flexibleEl = doc.querySelector('meta[name="flexible"]')
-            var dpr = 0
-            var scale = 0
-            var tid
-            var flexible = lib.flexible || (lib.flexible = {})
+        (function () {
+            'use strict';
 
-            if (metaEl) {
-                console.warn('将根据已有的meta标签来设置缩放比例')
-                var match = metaEl
-                    .getAttribute('content')
-                    .match(/initial\-scale=([\d\.]+)/)
-                if (match) {
-                    scale = parseFloat(match[1])
-                    dpr = parseInt(1 / scale)
-                }
-            } else if (flexibleEl) {
-                var content = flexibleEl.getAttribute('content')
-                if (content) {
-                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/)
-                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/)
-                    if (initialDpr) {
-                        dpr = parseFloat(initialDpr[1])
-                        scale = parseFloat((1 / dpr).toFixed(2))
-                    }
-                    if (maximumDpr) {
-                        dpr = parseFloat(maximumDpr[1])
-                        scale = parseFloat((1 / dpr).toFixed(2))
-                    }
-                }
-            }
+            var tid;
+            var listener = function (updateRootFontSize) {
+                var callback = function () {
+                    clearTimeout(tid);
+                    tid = setTimeout(updateRootFontSize, 300);
+                };
 
-            if (!dpr && !scale) {
-                var isIPhone = win.navigator.appVersion.match(/iphone/gi)
-                var devicePixelRatio = win.devicePixelRatio
-                if (isIPhone) {
-                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
-                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
-                        dpr = 3
-                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
-                        dpr = 2
-                    } else {
-                        dpr = 1
-                    }
-                } else {
-                    // 其他设备下，仍旧使用1倍的方案
-                    dpr = 1
-                }
-                scale = 1 / dpr
-            }
-
-            docEl.setAttribute('data-dpr', dpr)
-            if (!metaEl) {
-                metaEl = doc.createElement('meta')
-                metaEl.setAttribute('name', 'viewport')
-                metaEl.setAttribute(
-                    'content',
-                    'initial-scale=' +
-                    scale +
-                    ', maximum-scale=' +
-                    scale +
-                    ', minimum-scale=' +
-                    scale +
-                    ', user-scalable=no'
-                )
-                if (docEl.firstElementChild) {
-                    docEl.firstElementChild.appendChild(metaEl)
-                } else {
-                    var wrap = doc.createElement('div')
-                    wrap.appendChild(metaEl)
-                    doc.write(wrap.innerHTML)
-                }
-            }
-
-            function refreshRem() {
-                var width = docEl.getBoundingClientRect().width
-                if (width / dpr > 540) {
-                    width = 540 * dpr
-                }
-                var rem = width / 10
-                docEl.style.fontSize = rem + 'px'
-                flexible.rem = win.rem = rem
-            }
-
-            win.addEventListener(
-                'resize',
-                function () {
-                    clearTimeout(tid)
-                    tid = setTimeout(refreshRem, 300)
-                },
-                false
-            )
-            win.addEventListener(
-                'pageshow',
-                function (e) {
-                    if (e.persisted) {
-                        clearTimeout(tid)
-                        tid = setTimeout(refreshRem, 300)
-                    }
-                },
-                false
-            )
-
-            if (doc.readyState === 'complete') {
-                doc.body.style.fontSize = 14 * dpr + 'px'
-            } else {
-                doc.addEventListener(
-                    'DOMContentLoaded',
+                window.addEventListener('resize', callback, false);
+                window.addEventListener(
+                    'pageshow',
                     function (e) {
-                        doc.body.style.fontSize = 14 * dpr + 'px'
+                        e.persisted && callback();
                     },
                     false
-                )
+                );
+            };
+
+            function getDpr(scale) {
+                var dpr;
+
+                // 是否有默认值
+                if (scale) {
+                    dpr = parseInt(1 / scale, 10);
+                } else {
+                    dpr = window.devicePixelRatio;
+                }
+
+                if (window.navigator.appVersion.match(/iphone/gi)) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (dpr >= 3) {
+                        return 3
+                    } else if (dpr >= 2) {
+                        return 2
+                    }
+                }
+                // 其他设备下，仍旧使用1倍的方案
+                return 1
             }
 
-            refreshRem()
+            function getRootFontSize(pageWidth, dpr) {
+                if (pageWidth / dpr > 540) {
+                    pageWidth = 540 * dpr;
+                }
+                return ((pageWidth / 10) + "px")
+            }
 
-            flexible.dpr = win.dpr = dpr
-            flexible.refreshRem = refreshRem
-            flexible.rem2px = function (d) {
-                var val = parseFloat(d) * this.rem
-                if (typeof d === 'string' && d.match(/rem$/)) {
-                    val += 'px'
-                }
-                return val
+            function getBodyFontSize(dpr) {
+                return ((12 * dpr) + "px")
             }
-            flexible.px2rem = function (d) {
-                var val = parseFloat(d) / this.rem
-                if (typeof d === 'string' && d.match(/px$/)) {
-                    val += 'rem'
+
+            var dpr = 0; // devicePixelRatio
+            var docEl = document.documentElement;
+
+            var updateRootFontSize = function () {
+                var width = docEl.getBoundingClientRect().width;
+                docEl.style.fontSize = getRootFontSize(width, dpr);
+            };
+
+            // 计算 dpr
+            var metaEl = document.querySelector('meta[name="viewport"]');
+            if (metaEl) {
+                var match = metaEl.getAttribute('content').match(/initial-scale=([\d.]+)/);
+                dpr = getDpr(match && parseFloat(match[1]));
+            } else {
+                dpr = getDpr();
+
+                // 创建新的 meta 标签并设置 viewport 属性
+                var scale = 1 / dpr;
+                var el = document.createElement('meta');
+                el.setAttribute('name', 'viewport');
+                el.setAttribute(
+                    'content',
+                    ("initial-scale=" + scale + ",maximum-scale=" + scale + ",minimum-scale=" + scale + ",user-scalable=no")
+                );
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(el);
+                } else {
+                    var wrap = document.createElement('div');
+                    wrap.appendChild(el);
+                    document.write(wrap.innerHTML);
                 }
-                return val
             }
-        })(window, window['lib'] || (window['lib'] = {}))
+
+            // 给 body 设置 font-size
+            if (document.readyState === 'complete') {
+                document.body.style.fontSize = getBodyFontSize(dpr);
+            } else {
+                document.addEventListener(
+                    'DOMContentLoaded',
+                    function () {
+                        document.body.style.fontSize = getBodyFontSize(dpr);
+                    },
+                    false
+                );
+            }
+
+            // 给 html 添加 data-dpr 属性
+            docEl.setAttribute('data-dpr', dpr);
+
+            // 监听页面变化 resize pageshow
+            listener(updateRootFontSize);
+
+            // 初始化 html 字体
+            updateRootFontSize();
+
+        }());
     </script>
 </head>
 <body>

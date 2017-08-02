@@ -1,9 +1,9 @@
-import uiComponents from '../../../dist/redwing'
-import '../../../dist/redwing.css'
+// import uiComponents from '../../../dist/redwing'
+// import '../../../dist/redwing.css'
+import uiComponents from '../../components'
 import pageComponents from '../../pages/components'
 import Toast from '../plugins/toast'
 
-console.log(uiComponents)
 export default {
     install(Vue) {
         Vue.prototype.$toast = Toast
