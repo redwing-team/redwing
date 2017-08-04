@@ -53,7 +53,7 @@ export default {
             }
 
             const html = e.clipboardData.getData(type)
-            pasteHtmlAtCaret(html)
+            pasteHtmlAtCaret(html.replace(/>\s+</gi, '><'))
             this.input()
         },
         input() {
